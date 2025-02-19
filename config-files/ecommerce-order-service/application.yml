@@ -3,8 +3,6 @@ server:
 
 spring:
   application: ecommerce-order-service
-#  profiles:
-#    active: dev
 
   datasource:
     url: jdbc:pgsql://${DB_HOST:localhost}:${DB_PORT:5432}/ecommerce-order-db
