@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ecommerce-user-service-route
+          uri: lb://ecommerce-user-service
+          predicates:
+            - Path=/users/**
+
+        - id: ecommerce-product-service-route
+          uri: lb://ecommerce-product-service
+          predicates:
+            - Path=/products/**
+
+        - id: ecommerce-order-service-route
+          uri: lb://ecommerce-order-service
+          predicates:
+            - Path=/orders/**
+
+        - id: ecommerce-payment-service-route
+          uri: lb://ecommerce-payment-service
+          predicates:
+            - Path=/payments/**
+
+        - id: ecommerce-notification-service-route
+          uri: lb://ecommerce-notification-service
+          predicates:
+            - Path=/notifications/**
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://localhost:8000/realms/ecommerce"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
